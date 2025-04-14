@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import './App.css';
 
 function App() {
+  //this useState has an object for its one value. That object can hold multiple properties
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -24,7 +25,9 @@ function App() {
             type="text"
             id="name"
             value={formData.name}
-            onChange={e => setFormData({ ...formData, name: e.target.value })}
+            //Here, we use an anonymous function for the handler that just calls the useState setter function, with a new object as the parameter
+            //To define that object, we use the spread operator to assign all of the current properties of formData, then we override the one for this field
+            onChange={e => setFormData({ ...formData, name: e.target.value })}  
           />
         </div>
         <div>

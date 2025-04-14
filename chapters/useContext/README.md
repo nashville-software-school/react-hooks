@@ -1,44 +1,72 @@
 # useContext
 
-`useContext` is a React hook that allows you to access data from a context.
+`useContext` is a React hook that allows you to have shared data between components, without using prop drilling. Prop drilling is when you have to pass props through components into their child components, even if some of those components don't need the data themselves. `useContext` solves this problem by holding some state and giving components a way to directly access it. It's particularly useful for themes, user authentication, and other global data that needs to be accessible in many components.
 
-## Purpose and Explanation
+## How to Use It
 
-The main purpose of `useContext` is to avoid prop drilling by providing a way to share data between components at different levels of the component tree.
+The `useContext` hook takes one argument:
 
-## Typical Usage
+1.  **context:** The context object you want to access. This object is created using `React.createContext()`.
+
+**Return Value:**
+
+`useContext` returns the current context value for the given context. The context value is determined by the `value` prop of the nearest `<MyContext.Provider>` above the calling component in the tree.
+
+**Example:**
 
 ```javascript
-import React, { useContext } from 'react';
+import React, { createContext, useContext } from 'react';
 
-// Create a context
-const MyContext = React.createContext(null);
+// Create a context with a default value
+const ThemeContext = createContext({
+  theme: 'light'
+});
 
+// Theme provider component that manages the theme state
+function ThemeProvider({ children }) {
+  const [theme, setTheme] = useState('light');
+  
+  const toggleTheme = () => {
+    setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light');
+  };
+
+  // Provide both theme state and toggle function through context
+  return (
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+      {children}
+    </ThemeContext.Provider>
+  );
+}
+
+// Component that consumes the theme context
 function MyComponent() {
   // Access the context value
-  const value = useContext(MyContext);
+  const { theme, toggleTheme } = useContext(ThemeContext);
 
   return (
-    <div>
-      {value}
+    <div style={{ backgroundColor: theme === 'light' ? '#fff' : '#000', color: theme === 'light' ? '#000' : '#fff' }}>
+      <p>Current theme: {theme}</p>
+      <button onClick={toggleTheme}>Toggle Theme</button>
     </div>
   );
 }
 
 function App() {
   return (
-    <MyContext.Provider value="Hello from context!">
+    <ThemeProvider>
       <MyComponent />
-    </MyContext.Provider>
+    </ThemeProvider>
   );
 }
 ```
 
-In this example, `MyComponent` can access the value provided by `MyContext.Provider` without needing to receive it as a prop.
+**Explanation of the Example:**
+
+In this example, we first create `ThemeContext` using `React.createContext()` with a default value. Then we create a dedicated `ThemeProvider` component that manages the theme state and provides both the state and toggle function through context. This pattern encapsulates all theme-related logic within the provider component. `MyComponent` uses `useContext(ThemeContext)` to access the theme values, and the `App` component simply wraps its content with `ThemeProvider`. When the "Toggle Theme" button is clicked, the `toggleTheme` function from the context updates the theme state, causing all consuming components to re-render with the new theme.
 
 ## When to Use
 
-*   **Avoiding Prop Drilling:** Use `useContext` when you have data that needs to be accessed by many components within your application.
-*   **Global State Management:** `useContext` can be used to manage global state within a React application, especially when combined with `useReducer`.
-
-To sum it up, `useContext` is a valuable tool for accessing context values, avoiding prop drilling, and managing global state in React applications.
+*   **Avoiding Prop Drilling:** Use `useContext` when you have data that needs to be accessed by many components within your application, avoiding the need to pass props down through multiple layers of components.
+*   **Global State Management:** `useContext` can be used to manage global state within a React application, especially when combined with `useReducer` for more complex state logic.
+*   **Theming:** `useContext` is ideal for providing themes to your application, allowing you to easily switch between different themes without modifying individual components.
+*   **Authentication:** `useContext` can be used to store and share authentication information, such as the current user's login status and user data.

@@ -1,70 +1,100 @@
-# Getting Started with Create React App
+# Video Player with useRef Exercise
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This exercise demonstrates how to use the `useRef` hook to interact with DOM elements and persist values between renders. You'll build a video player that uses refs to control the video element and manage intervals.
 
-## Available Scripts
+## Objectives
 
-In the project directory, you can run:
+1. Understand when and why to use useRef
+2. Learn how to access DOM elements with refs
+3. Use refs to store mutable values
+4. Handle cleanup of intervals with refs
 
-### `npm start`
+## Starting Point
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+The starter code provides:
+- Basic video player UI structure
+- State management for play/pause and current time
+- Placeholder functions for video controls
+- A sample video source
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Tasks
 
-### `npm test`
+1. **Create and Attach Refs**
+   - Import useRef from React
+   - Create videoRef for the video element
+   - Create intervalRef for the time update interval
+   - Attach videoRef to the video element using the ref attribute
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+2. **Implement Video Controls**
+   - Use videoRef to play/pause the video
+   - Access video duration through videoRef
+   - Implement seeking functionality
+   - Update time display using video properties
 
-### `npm run build`
+3. **Handle Time Updates**
+   - Use intervalRef to store the setInterval ID
+   - Update current time using videoRef
+   - Properly clean up interval on component unmount
+   - Handle play/pause state changes
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+4. **Add Error Handling**
+   - Check if videoRef.current exists before accessing
+   - Handle cases where video fails to load
+   - Manage edge cases in time formatting
+   - Ensure proper cleanup in all scenarios
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Key Concepts
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. **DOM References**
+   ```javascript
+   const videoRef = useRef(null)
+   // Later: videoRef.current.play()
+   ```
 
-### `npm run eject`
+2. **Interval Management**
+   ```javascript
+   intervalRef.current = setInterval(() => {
+     // Update time
+   }, 1000)
+   // Cleanup: clearInterval(intervalRef.current)
+   ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+3. **Ref Persistence**
+   - Refs persist between renders
+   - Updating refs doesn't trigger re-renders
+   - Refs can store any value
+   - Common for DOM elements and timers
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Tips
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- Always check if .current exists before using refs
+- Use refs for values that shouldn't trigger re-renders
+- Clean up intervals in useEffect cleanup function
+- Remember that ref updates are synchronous
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Common Mistakes
 
-## Learn More
+- Forgetting to use .current
+- Not cleaning up intervals
+- Using refs when state is more appropriate
+- Overusing refs for values that should be in state
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## When to Use useRef
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Use useRef when you need to:
+1. Access DOM elements directly
+2. Store mutable values that shouldn't trigger re-renders
+3. Keep track of intervals or timeouts
+4. Maintain values between renders without causing updates
 
-### Code Splitting
+## Why Not useState?
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Some operations are better with useRef because:
+- They don't need to trigger re-renders
+- They need to be synchronous
+- They're purely imperative
+- They deal with DOM elements directly
 
-### Analyzing the Bundle Size
+## Solution
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Check the completed version in the `completed` folder to see the working implementation.

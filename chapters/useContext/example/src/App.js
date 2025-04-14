@@ -1,16 +1,21 @@
-import React, {useState} from 'react';
-import './App.css';
+// TODO: Import ThemeProvider from ThemeContext
+import ThemeToggle from './ThemeToggle'
+import Content from './Content'
+import Sidebar from './Sidebar'
 
 function App() {
-  
-  const [name, setName] = useState("");
-
   return (
-    <div className="App">
-      <input value={name} onChange={e=>setName(e.target.value)}/>
-      <div>Value:<br/><b>{name}</b></div>
+    // TODO: Wrap the app content with ThemeProvider
+    <div className="App" style={{ padding: '20px', maxWidth: '800px', margin: '0 auto' }}>
+      <div style={{ marginBottom: '20px' }}>
+        <ThemeToggle />
+      </div>
+      <div style={{ display: 'flex', gap: '20px' }}>
+        <Sidebar />
+        <Content />
+      </div>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

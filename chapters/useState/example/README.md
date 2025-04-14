@@ -15,6 +15,9 @@ The goal of this project is to practice using the `useState` hook in React to ma
 
 Refer to the `/completed/src/App.js` file for a completed example.
 
-## Bonus Practice
+## Refactor
 
-If you implemented this with three separate state variables, refactor it to use one that is an object with three properties. Or if you did that, then refactor it to use multiple state variables. One solution to this is shown in `completed/src/App2.js`
+If you implemented this with three separate state variables, refactor it to use one that is an object with three properties. You'll probably find the [spread operator](https://www.w3schools.com/react/react_es6_spread.asp) useful. If you already solved this with an object, then refactor it to use multiple state variables. One solution to this is shown in `completed/src/App2.js`. 
+
+Generally, combining state in one object is good for related data that you work with simultaneously, like a form. 
+
