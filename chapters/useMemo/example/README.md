@@ -61,36 +61,6 @@ const multipliedNumbers = useMemo(() => {
 }, [numbers, multiplier])
 ```
 
-## Key Concepts
-
-1. **Memoization**
-   - Stores result of expensive calculations
-   - Returns cached result when dependencies haven't changed
-   - Recalculates only when dependencies change
-
-2. **Performance Trade-offs**
-   - useMemo has its own overhead
-   - Only use for expensive calculations
-   - Consider computation cost vs memory usage
-
-3. **Dependencies**
-   - Empty array = calculate once
-   - Including dependencies = recalculate when they change
-   - Missing dependencies = potential bugs
-
-## Tips
-
-- Use useMemo for expensive calculations only
-- Consider whether the performance benefit is worth the added complexity
-- Use the React DevTools Profiler to measure performance impact
-- Remember that useMemo itself has a performance cost
-
-## Common Mistakes
-
-- Memoizing simple calculations
-- Missing dependencies
-- Memoizing everything without measuring
-- Not considering the cost-benefit trade-off
 
 ## Solution
 

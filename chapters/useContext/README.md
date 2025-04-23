@@ -1,6 +1,6 @@
 # useContext
 
-`useContext` is a React hook that allows you to have shared data between components, without using prop drilling. Prop drilling is when you have to pass props through components into their child components, even if some of those components don't need the data themselves. `useContext` solves this problem by holding some state and giving components a way to directly access it. It's particularly useful for themes, user authentication, and other global data that needs to be accessible in many components.
+`useContext` is a React hook that allows you to share data between components without using prop drilling. Prop drilling is when you have to pass props through components into their child components, even if some of those components don't need the data themselves. `useContext` solves this problem by holding some state and giving components a way to access it directly. It's particularly useful for themes, user authentication, and other global data that needs to be accessible in many components.
 
 ## How to Use It
 

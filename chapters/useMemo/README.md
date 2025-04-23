@@ -47,11 +47,11 @@ function MyComponent({ a, b }) {
 
 In this example, the `useMemo` hook is used to memoize the result of the `a + b + count` calculation. The calculation is only re-run when the `a`, `b`, or `count` values change. This prevents the calculation from being re-run on every render of the component, which can improve performance.
 
-## When to Use
 
-*   **Expensive Calculations:** Use `useMemo` when you have a calculation that is expensive and doesn't need to be re-calculated on every render.
-*   **Referential Equality:** Use `useMemo` when passing values to child components that rely on referential equality to avoid re-rendering.
-*   **Optimizing Performance:** Use `useMemo` to optimize the performance of your application by preventing unnecessary recalculations.
-*   **Complex Data Transformations:** Use `useMemo` to memoize complex data transformations that are expensive to compute.
+## Key Concepts
 
-To sum it up, `useMemo` is a valuable tool for optimizing performance by memoizing expensive calculations. It helps prevent unnecessary recalculations and ensures that your application runs smoothly.
+- useMemo stores result of expensive calculations. It runs its function only when dependencies have changed. Otherwise, it returns the cached result.
+
+- useMemo has some trade-offs. It introduces more complexity and has its own computational overhead and memory usage, so only use for expensive calculations. Use React DevTools profiler to measure and compare performance.
+
+- Its dependency array works similarly to useEffect. An empty array will cause it to run only once, and omitting the array can introduce bugs and instability. 

@@ -2,7 +2,7 @@
 
 This exercise will help you understand how to use the `useEffect` hook in React for handling side effects like data fetching. You'll create a component that fetches and displays dog images, both on initial load and when a user interaction triggers a state change.
 
-We'll, implement a `useEffect` that runs once when the component mounts, and one when specific state changes to see the difference between effects with and without dependencies
+We'll implement a `useEffect` that runs once when the component mounts, and one when specific state changes to see the difference between effects with and without dependencies
 
 ## Starting Point
 
@@ -38,4 +38,6 @@ Check the completed version in the `completed` folder to see the working impleme
 
 Add a `loading` flag using useState. It should start as true and get set to false after the random image is loaded. It should also be set to true while the chosen breed's image is loading. Then use this boolean with conditional rendering to display a loading message instead of the image. 
 
-See `App2.js` for completed code that includes this.
+Refactor this to accomplish the same functionality with only one instance of useEffect, using logic to determine whether to show a specific breed or a random one.
+
+See `App2.js` for completed code that includes these.

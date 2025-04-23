@@ -1,5 +1,3 @@
-// TODO: Import createContext and useState from 'react'
-
 // TODO: Create a context for theme using createContext
 
 // TODO: Create a ThemeProvider component that:
