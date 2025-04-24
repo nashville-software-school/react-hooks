@@ -9,12 +9,12 @@ In these lessons, we'll cover the most essential hooks, followed by a number of 
 ## Essentials
 
 - [useState](./chapters/useState/README.md)
-- [useEffect](./chapters/useEffect/README.md) <--TODO
-- [useContext](./chapters/useContext/README.md) <--TODO
+- [useEffect](./chapters/useEffect/README.md)
+- [useContext](./chapters/useContext/README.md)
 
 ## Useful
 
-- [useRef](./chapters/useRef/README.md) <--TODO
+- [useRef](./chapters/useRef/README.md) 
 - [useMemo](./chapters/useMemo/README.md) <--TODO
 - [useCallback](./chapters/useCallback/README.md) <--TODO
 - [useReducer](./chapters/useReducer/README.md) <--TODO
@@ -35,10 +35,6 @@ In these lessons, we'll cover the most essential hooks, followed by a number of 
 
 
 NOTES: 
-useState - Done
-useEffect - Done
-useContext - Done
-useRef - Done
 
 useMemo
     readme - note that this calculation isn't actually expensive. 
