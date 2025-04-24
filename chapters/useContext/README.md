@@ -44,7 +44,7 @@ function MyComponent() {
   const { theme, toggleTheme } = useContext(ThemeContext);
 
   return (
-    <div style={{ backgroundColor: theme === 'light' ? '#fff' : '#000', color: theme === 'light' ? '#000' : '#fff' }}>
+    <div className={`theme-container ${theme}`}>
       <p>Current theme: {theme}</p>
       <button onClick={toggleTheme}>Toggle Theme</button>
     </div>
@@ -62,7 +62,7 @@ function App() {
 
 **Explanation of the Example:**
 
-In this example, we first create `ThemeContext` using `React.createContext()` with a default value. Then we create a dedicated `ThemeProvider` component that manages the theme state and provides both the state and toggle function through context. This pattern encapsulates all theme-related logic within the provider component. `MyComponent` uses `useContext(ThemeContext)` to access the theme values, and the `App` component simply wraps its content with `ThemeProvider`. When the "Toggle Theme" button is clicked, the `toggleTheme` function from the context updates the theme state, causing all consuming components to re-render with the new theme.
+In this example, we first create `ThemeContext` using `React.createContext()` with a default value. Then we create a dedicated `ThemeProvider` component that manages the theme state and provides both the state and toggle function through context. This pattern encapsulates all theme-related logic within the provider component. `MyComponent` uses `useContext(ThemeContext)` to access the theme values, and the `App` component simply wraps its content with `ThemeProvider`. When the "Toggle Theme" button is clicked, the `toggleTheme` function from the context updates the theme state, causing all consuming components to re-render with the new theme, based on the CSS rules set for the corresponding class in a CSS file.
 
 ## When to Use
 

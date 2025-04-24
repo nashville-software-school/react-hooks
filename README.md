@@ -35,8 +35,12 @@ In these lessons, we'll cover the most essential hooks, followed by a number of 
 
 
 NOTES: 
-useContext - put styles in stylesheet, not in JSX
-add useRef readme
-useMemo readme - note that this calculation isn't actually expensive. 
-useMemo example/completed - move styles to CSS
-useMemo - discuss referential issue (not running a useEffect if an object is updated to identical value)
+useState - Done
+useEffect - Done
+useContext - Done
+useRef - Done
+
+useMemo
+    readme - note that this calculation isn't actually expensive. 
+    example/completed - move styles to CSS
+    discuss referential issue (not running a useEffect if an object is updated to identical value)

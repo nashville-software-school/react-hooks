@@ -6,18 +6,18 @@
 
 The primary use cases for `useRef` are:
 
-*   **Persisting values between renders:** Unlike regular variables declared within a component, `useRef`'s value persists across renders. This is useful for storing things like timers, previous prop values, or other data that shouldn't trigger a re-render when it changes. Think of it as a way to store mutable data without React knowing about it.
+*   **Persisting values between renders:** Unlike regular variables declared within a component, `useRef`'s value persists across renders. This is useful for storing things like timers, previous prop/state values, or other data that shouldn't trigger a re-render when it changes. Think of it as a way to store mutable data without React knowing about it.
 *   **Accessing DOM elements:** `useRef` can be used to hold a reference to a DOM element, allowing you to directly interact with it. This is useful for things like focusing an input, measuring the size of an element, or integrating with third-party libraries that require direct DOM access.
 
 ## How to Use It
 
 The `useRef` hook takes one argument:
 
-1.  **initialValue:** The initial value of the ref. This can be any JavaScript value, such as a number, string, object, or null.
+1.  **initialValue:** The initial value of the ref. This can be any JavaScript value, like a number, string, object, or null.
 
 **Return Value:**
 
-`useRef` returns a mutable ref object whose `.current` property is initialized to the `initialValue`. The `.current` property can be modified without causing a re-render.
+`useRef` returns a mutable object whose `.current` property is initialized to the `initialValue`. The `.current` property can be modified without causing a re-render.
 
 ## Typical Usage
 

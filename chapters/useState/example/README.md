@@ -9,7 +9,7 @@ The goal of this project is to practice using the `useState` hook in React to ma
 1.  **Import `useState`:** Import the `useState` hook from React.
 2.  **Create state variables:** For each input field (name, email, password), create a separate state variable using `useState`.
 3.  **Connect state variables to input fields:** Connect each state variable to its corresponding input field using the `value` and `onChange` attributes.
-4.  **Handle form submission:** Include these state values in the 
+4.  **Handle form submission:** Include these state values in the alert that is shown.
 
 ## Example
 
@@ -19,5 +19,4 @@ Refer to the `/completed/src/App.js` file for a completed example.
 
 If you implemented this with three separate state variables, refactor it to use one that is an object with three properties. You'll probably find the [spread operator](https://www.w3schools.com/react/react_es6_spread.asp) useful. If you already solved this with an object, then refactor it to use multiple state variables. One solution to this is shown in `completed/src/App2.js`. 
 
-Generally, combining state in one object is good for related data that you work with simultaneously, like a form. 
-
+Using separate state variables can require repetitive or clunky code, but combining it in a single object takes a bit more work and complexity. Generally, the latter is better for related data that you work with simultaneously, like a form. 

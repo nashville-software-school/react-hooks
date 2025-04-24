@@ -6,11 +6,11 @@ import Sidebar from './Sidebar'
 function App() {
   return (
     <ThemeProvider>
-      <div className="App" style={{ padding: '20px', maxWidth: '800px', margin: '0 auto' }}>
-        <div style={{ marginBottom: '20px' }}>
+      <div className="App app-container">
+        <div className="toggle-container">
           <ThemeToggle />
         </div>
-        <div style={{ display: 'flex', gap: '20px' }}>
+        <div className="content-layout">
           <Sidebar />
           <Content />
         </div>

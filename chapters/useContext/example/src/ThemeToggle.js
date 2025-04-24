@@ -1,5 +1,3 @@
-// TODO: Import useContext from 'react'
-// TODO: Import ThemeContext
 
 function ThemeToggle() {
   // TODO: Use the useContext hook to access theme and toggleTheme

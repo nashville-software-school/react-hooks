@@ -31,7 +31,7 @@ function App() {
       <button onClick={handleBreedChange}>Change Breed</button>
       
       {isLoading ?
-        <p>"Loading"</p>
+        <p>Loading</p>
         :
         <img 
           src={dogImage} 

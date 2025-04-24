@@ -1,107 +1,37 @@
-import { useState, useEffect } from 'react'
-// TODO: Import useRef from 'react'
+import React, { useState } from 'react';
+import './App.css';
 
 function App() {
-  const [isPlaying, setIsPlaying] = useState(false)
-  const [currentTime, setCurrentTime] = useState(0)
   
+  const [name, setName] = useState("");
   // TODO: Create refs for:
-  // 1. video element (videoRef)
-  // 2. interval timer (intervalRef)
+  // (1) Storing previous name value
+  // (2) Accessing input element
+  // (3) Storing input dimensions
 
-  // TODO: Update this effect to use refs
-  useEffect(() => {
-    let interval
-    if (isPlaying) {
-      interval = setInterval(() => {
-        // Currently can't access video element
-        // Need to use ref to get currentTime
-        setCurrentTime(0)
-      }, 1000)
-    }
+  // TODO: (1) Add useEffect to update previous name when name changes
 
-    return () => clearInterval(interval)
-  }, [isPlaying])
+  // TODO: (3) Add useEffect to measure input dimensions on mount
 
-  const handlePlayPause = () => {
-    // TODO: Use videoRef to play/pause the video
-    setIsPlaying(!isPlaying)
-  }
-
-  const handleTimeUpdate = (e) => {
-    setCurrentTime(e.target.currentTime)
-  }
-
-  const handleSeek = (e) => {
-    const time = parseFloat(e.target.value)
-    // TODO: Use videoRef to set video currentTime
-    setCurrentTime(time)
-  }
-
-  const formatTime = (timeInSeconds) => {
-    const minutes = Math.floor(timeInSeconds / 60)
-    const seconds = Math.floor(timeInSeconds % 60)
-    return `${minutes}:${seconds.toString().padStart(2, '0')}`
-  }
+  // TODO: (2) Create function to focus input element
 
   return (
-    <div style={{ padding: '20px', maxWidth: '800px', margin: '0 auto' }}>
-      <h1>Video Player with useRef</h1>
-      
-      <div style={{ marginBottom: '20px' }}>
-        <video
-          // TODO: Add ref attribute
-          width="100%"
-          onTimeUpdate={handleTimeUpdate}
-          onEnded={() => setIsPlaying(false)}
-        >
-          <source 
-            src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" 
-            type="video/mp4" 
-          />
-          Your browser does not support the video tag.
-        </video>
+    <div className="App">
+      <input
+        value={name}
+        onChange={e => setName(e.target.value)}
+        // TODO: (2,3) Add ref attribute to input
+      />
+      {/* TODO: (2) Add button to focus input */}
+      <div>
+        Current Value:
+        <br />
+        <b>{name}</b>
       </div>
-
-      <div style={{ 
-        display: 'flex', 
-        alignItems: 'center', 
-        gap: '10px',
-        marginBottom: '20px'
-      }}>
-        <button
-          onClick={handlePlayPause}
-          style={{ padding: '8px 16px' }}
-        >
-          {isPlaying ? 'Pause' : 'Play'}
-        </button>
-        
-        <input
-          type="range"
-          min="0"
-          max={0} // TODO: Use videoRef to get duration
-          value={currentTime}
-          onChange={handleSeek}
-          style={{ flex: 1 }}
-        />
-        
-        <span>
-          {formatTime(currentTime)} / {formatTime(0)} {/* TODO: Use videoRef to get duration */}
-        </span>
-      </div>
-
-      <div style={{ marginTop: '20px' }}>
-        <h3>Tasks to complete:</h3>
-        <ul>
-          <li>Create videoRef to access the video element</li>
-          <li>Create intervalRef to store the timer ID</li>
-          <li>Implement play/pause functionality using the video ref</li>
-          <li>Update the time display using the video duration</li>
-          <li>Implement seeking using the video ref</li>
-        </ul>
-      </div>
+      {/* TODO: (1) Add div to display previous value */}
+      {/* TODO: (3) Add div to display input dimensions */}
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

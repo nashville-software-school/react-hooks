@@ -48,4 +48,4 @@ function MyComponent() {
 
 **Explanation of the Example:**
 
-In this example, `useEffect` is used to fetch data from an API and set up a timer when the component mounts. The empty dependency array `[]` ensures that the effect only runs once. The effect function returns a cleanup function that clears the timer when the component unmounts.
+In this example, `useEffect` is used to fetch data from an API and set up a timer when the component mounts. The empty dependency array `[]` ensures that the effect only runs once. The effect function also returns a cleanup function. React will call this function when the component unmounts. In most cases, this isn't necessary. But here, we need it to stop the timer that is running.
