@@ -1,6 +1,11 @@
 .container {
-  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   min-height: 100vh;
+  font-family: sans-serif;
+  padding: 20px;
 }
 
 .container.dark {
@@ -13,33 +18,53 @@
   color: #333;
 }
 
-.section {
+h1 {
   margin-bottom: 20px;
 }
 
-.section-top {
-  margin-top: 20px;
+label {
+  font-size: 1.2em;
+  margin-bottom: 5px;
+  display: block;
+  margin-top: 15px;
 }
 
-.number-box {
+input {
   padding: 10px;
-  margin: 5px;
-  display: inline-block;
+  font-size: 1.2em;
+  border: 1px solid #ccc;
   border-radius: 5px;
-}
-
-.number-box.dark {
-  background-color: #444;
-}
-
-.number-box.light {
-  background-color: #f0f0f0;
+  margin-left: 10px;
 }
 
 .multiplier-input {
   margin: 0 10px;
 }
 
-.add-button {
-  margin-right: 10px;
+button {
+  padding: 10px 20px;
+  font-size: 1.2em;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 20px 0;
+}
+
+.container.dark button {
+  background-color: #0056b3;
+}
+
+h3 {
+  margin-top: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f0f0f0;
+}
+
+.container.dark h3 {
+  background-color: #444;
+  border-color: #555;
 }
