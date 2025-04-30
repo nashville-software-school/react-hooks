@@ -1,32 +1,49 @@
 import { useState } from 'react'
+import './App.css'
 
 function App() {
   const [dogImage, setDogImage] = useState("")
   const [breed, setBreed] = useState("husky")
+  const [allBreeds, setAllBreeds] = useState(["husky","otterhound","dalmation"])
 
-  // TODO: Add an effect that runs once on mount to fetch a random dog image from https://dog.ceo/api/breeds/image/random
+  //TODO: On mount, fetch all available breeds
 
-  // TODO: Add an effect that runs when breed changes to fetch that breed's image from https://dog.ceo/api/breed/${breed}/images/random
+  //TODO: When breed changes, fetch a specific breed image
 
-  const handleBreedChange = () => {
-    const breeds = ["husky", "beagle", "boxer", "dalmatian"]
-    const randomBreed = breeds[Math.floor(Math.random() * breeds.length)]
-    setBreed(randomBreed)
+  const handleBreedChange = (event) => {
+    setBreed(event.target.value)
   }
 
   return (
     <div className="App">
-      <h1>Dog Image Viewer</h1>
-      <p>Current breed: {breed}</p>
+      <div className="top-panel">
+        <h1>Dog Image Viewer</h1>
+        <div className="form-group">
+          <label htmlFor="breed">Select Breed:</label>
+          <select
+            id="breed"
+            value={breed}
+            onChange={handleBreedChange}
+          >
+            {allBreeds.map(breed => (
+              <option key={breed} value={breed}>
+                {breed}
+              </option>
+            ))}
+          </select>
+        </div>
+      </div>
 
-      <button onClick={handleBreedChange}>Change Breed</button>
-      
-      <img 
-        src={dogImage} 
-        alt="Random dog" 
-        style={{ maxWidth: "500px", marginTop: "20px" }} 
-      />
-      
+      <div className="bottom-panel">
+        <h2>Selected Breed: {breed}</h2>
+        <div className="image-container">
+          <img
+            src={dogImage}
+            alt={`${breed} dog`}
+            className="dog-image"
+          />
+        </div>
+      </div>
     </div>
   )
 }
