@@ -11,9 +11,9 @@ function App() {
     console.log('Calculating multiplied numbers...')
     // Artificial delay to simulate expensive computation
     const start = performance.now()
-    while (performance.now() - start < 200) { }
+    while (performance.now() - start < 1000) { }
     return multiplier * factor
-  }, [multiplier]) // Only recalculate when numbers or multiplier changes
+  }, [multiplier, factor]) // Only recalculate when numbers or multiplier changes
 
   // Theme toggle doesn't trigger expensive recalculations
   const toggleTheme = () => {
@@ -38,7 +38,7 @@ function App() {
           />
         </label>
         <label>
-          Multiplier:
+          Factor:
           <input
             type="number"
             value={factor}

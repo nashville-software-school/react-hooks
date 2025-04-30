@@ -6,14 +6,16 @@ function App() {
   const [factor, setFactor] = useState(2)
   const [darkMode, setDarkMode] = useState(false)
 
-  // Expensive computation memoized with useMemo
-  const multipliedNumber = () => {
+  const doExpensiveMultiplication = () => {
     console.log('Calculating multiplied numbers...')
     // Artificial delay to simulate expensive computation
     const start = performance.now()
-    while (performance.now() - start < 200) { }
+    while (performance.now() - start < 1000) { }
     return multiplier * factor
   };
+
+  //TODO: replace this expensive call that runs every render with a memoized version
+  const multipliedNumber = doExpensiveMultiplication();
 
   // Theme toggle doesn't trigger expensive recalculations
   const toggleTheme = () => {
