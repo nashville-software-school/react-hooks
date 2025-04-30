@@ -22,7 +22,7 @@ const ThemeContext = createContext({
   theme: 'light'
 });
 
-// Theme provider component that manages the theme state
+// Theme provider component that wraps the provider and manages the theme state
 function ThemeProvider({ children }) {
   const [theme, setTheme] = useState('light');
   
@@ -30,7 +30,7 @@ function ThemeProvider({ children }) {
     setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light');
   };
 
-  // Provide both theme state and toggle function through context
+  // Provide both theme state and toggle function to all children through context
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
       {children}
@@ -63,6 +63,8 @@ function App() {
 **Explanation of the Example:**
 
 In this example, we first create `ThemeContext` using `React.createContext()` with a default value. Then we create a dedicated `ThemeProvider` component that manages the theme state and provides both the state and toggle function through context. This pattern encapsulates all theme-related logic within the provider component. `MyComponent` uses `useContext(ThemeContext)` to access the theme values, and the `App` component simply wraps its content with `ThemeProvider`. When the "Toggle Theme" button is clicked, the `toggleTheme` function from the context updates the theme state, causing all consuming components to re-render with the new theme, based on the CSS rules set for the corresponding class in a CSS file.
+
+Note that while this simple example puts all the code together, we usually put context in a separate file and reference it directly from components throughout the app.
 
 ## When to Use
 
