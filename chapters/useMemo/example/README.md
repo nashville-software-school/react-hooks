@@ -15,7 +15,6 @@ The starter code provides:
 - A number multiplier application with artificial processing delays
 - Theme toggling to demonstrate unnecessary recalculations
 - Console logs to track when calculations occur
-- Expensive calculations that need optimization
 
 ## Tasks
 
