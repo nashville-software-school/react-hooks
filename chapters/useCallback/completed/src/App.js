@@ -1,17 +1,15 @@
 import { useState, useCallback, memo } from 'react'
+import './App.css'
 
 // Memoized child component that receives a callback
 const TodoItem = memo(function TodoItem({ todo, onToggle }) {
   console.log(`TodoItem rendered: ${todo.text}`)
   
   return (
-    <li style={{ 
-      textDecoration: todo.completed ? 'line-through' : 'none',
-      cursor: 'pointer',
-      padding: '8px',
-      margin: '4px 0',
-      backgroundColor: '#f0f0f0'
-    }} onClick={() => onToggle(todo.id)}>
+    <li
+      style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}
+      onClick={() => onToggle(todo.id)}
+    >
       {todo.text}
     </li>
   )
@@ -43,11 +41,11 @@ function App() {
   }
 
   return (
-    <div className="App" style={{ padding: '20px' }}>
+    <div className="App">
       <h1>Todo List</h1>
       
       {/* This count update won't cause TodoItems to re-render */}
-      <div style={{ marginBottom: '20px' }}>
+      <div>
         <button onClick={handleCountClick}>
           Count: {count}
         </button>
@@ -56,7 +54,7 @@ function App() {
         </p>
       </div>
 
-      <ul style={{ listStyle: 'none', padding: 0 }}>
+      <ul>
         {todos.map(todo => (
           <TodoItem
             key={todo.id}
@@ -66,7 +64,7 @@ function App() {
         ))}
       </ul>
 
-      <div style={{ marginTop: '20px' }}>
+      <div className="info-section">
         <p>Open console to see render logs</p>
         <p>Notice that TodoItems don't re-render when count changes</p>
       </div>

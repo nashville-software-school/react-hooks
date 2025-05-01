@@ -1,6 +1,7 @@
+
 # useCallback
 
-`useCallback` is a React hook that lets you memoize a function definition. This means it will return a memoized version of the callback function that only changes if one of the dependencies has changed.
+`useCallback` is a React hook that lets you memoize a function definition. This means it will return a memoized version of the callback function that only changes if one of the dependencies has changed. It's especially useful when using [React.memo](./react-memo.md).
 
 ## Purpose and Explanation
 
@@ -19,23 +20,45 @@ The `useCallback` hook takes two arguments:
 
 `useCallback` returns a memoized version of the callback function. This function is guaranteed to have the same reference unless one of the dependencies has changed.
 
-**Example:**
+**Example with React.memo:**
 
 ```javascript
 import React, { useCallback, useState } from 'react';
 
-function MyComponent() {
-  const [count, setCount] = useState(0);
+// Child component wrapped with React.memo
+const Button = React.memo(function Button({ onClick, label }) {
+  console.log(`${label} button rendered`);
+  return (
+    <button onClick={onClick}>
+      {label}
+    </button>
+  );
+});
 
-  // Memoize the increment function
+function Counter() {
+  const [count, setCount] = useState(0);
+  const [otherState, setOtherState] = useState(0);
+
+  // Memoize the increment function with useCallback
   const increment = useCallback(() => {
     setCount(c => c + 1);
   }, []); // The function never changes because it has no dependencies
 
+  // This function will be recreated on every render
+  const updateOtherState = () => {
+    setOtherState(s => s + 1);
+  };
+
   return (
     <div>
       <p>Count: {count}</p>
-      <button onClick={increment}>Increment</button>
+      <p>Other State: {otherState}</p>
+      
+      {/* This button will only re-render when increment changes */}
+      <Button onClick={increment} label="Increment" />
+      
+      {/* This button will re-render on every parent render */}
+      <Button onClick={updateOtherState} label="Update Other" />
     </div>
   );
 }
@@ -43,9 +66,18 @@ function MyComponent() {
 
 **Explanation of the Example:**
 
-In this example, `useCallback` is used to memoize the `increment` function. The `increment` function updates the `count` state. The dependency array is empty (`[]`), which means that the `increment` function will only be created once during the initial render. This is because the `increment` function doesn't depend on any values that could change over time.
+In this example:
 
-Without `useCallback`, a new `increment` function would be created on every render of `MyComponent`, even if the `count` state hasn't changed. This could lead to performance issues if `increment` was passed as a prop to a child component that was optimized with `React.memo`.
+1. We have a `Button` component wrapped with `React.memo` to prevent unnecessary re-renders.
+2. The `Counter` component has two state variables: `count` and `otherState`.
+3. The `increment` function is memoized with `useCallback` with an empty dependency array, meaning it will only be created once.
+4. The `updateOtherState` function is not memoized and will be recreated on every render.
+
+When the `Counter` component re-renders (e.g., when `otherState` changes):
+- The `Increment` button won't re-render because its `onClick` prop (the memoized `increment` function) hasn't changed.
+- The `Update Other` button will re-render because its `onClick` prop (the non-memoized `updateOtherState` function) is recreated with each render.
+
+This demonstrates how `useCallback` combined with `React.memo` can prevent unnecessary re-renders of child components.
 
 ## When to Use
 
@@ -54,4 +86,4 @@ Without `useCallback`, a new `increment` function would be created on every rend
 *   **Complex Calculations:** If the callback function performs complex calculations, memoizing it with `useCallback` can prevent these calculations from being re-executed unnecessarily.
 *   **Avoiding Unnecessary Effects:** If a function is used within a `useEffect` hook's dependency array, using `useCallback` can prevent the effect from running unnecessarily if the function reference hasn't changed.
 
-To sum it up, `useCallback` is a valuable tool for optimizing performance by memoizing function definitions, especially when passing callbacks to child components. It helps ensure that the function reference remains the same across renders unless its dependencies change, preventing unnecessary re-renders and improving overall application performance.
+To sum it up, `useCallback` is a valuable tool for optimizing performance by memoizing function definitions, especially when passing callbacks to child components. When used in conjunction with `React.memo`, it helps ensure that the function reference remains the same across renders unless its dependencies change, preventing unnecessary re-renders and improving overall application performance.
