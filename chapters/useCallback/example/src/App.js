@@ -1,5 +1,5 @@
 import { useState, memo } from 'react'
-// TODO: Import useCallback from 'react'
+import './App.css'
 
 // Memoized child component that receives a callback
 const TodoItem = memo(function TodoItem({ todo, onToggle }) {
