@@ -15,7 +15,7 @@ In these lessons, we'll cover the most essential hooks, followed by a number of 
 ## Useful
 
 - [useMemo](./chapters/useMemo/README.md)
-- [useCallback](./chapters/useCallback/README.md) <--TODO
+- [useCallback](./chapters/useCallback/README.md)
 - [useRef](./chapters/useRef/README.md) 
 - [useReducer](./chapters/useReducer/README.md) <--TODO
 - [useTransition](./chapters/useTransition/README.md) <--TODO

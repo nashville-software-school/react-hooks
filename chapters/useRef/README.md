@@ -48,9 +48,7 @@ function MyComponent() {
   }, []);
 
   return (
-    <div>
-      {/* No UI to control the interval, it just runs */}
-    </div>
+    <h2>useRef Example</h2>
   );
 }
 ```
