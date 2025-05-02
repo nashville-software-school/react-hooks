@@ -96,7 +96,7 @@ function App() {
     <div style={{ padding: '20px', maxWidth: '500px', margin: '0 auto' }}>
       <h1>Todo List with useReducer</h1>
 
-      {/* Add task form */}
+      {/* New task form */}
       <form onSubmit={handleAddTask} style={{ marginBottom: '20px' }}>
         <input
           type="text"

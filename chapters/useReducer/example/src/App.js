@@ -1,5 +1,4 @@
 import { useState } from 'react'
-// TODO: Import useReducer from 'react'
 
 // TODO: Define action types as constants
 // Example: const ADD_TASK = 'ADD_TASK'
@@ -12,7 +11,6 @@ import { useState } from 'react'
 // 4. Setting the filter
 
 function App() {
-  // Currently using useState for everything
   // TODO: Replace these with useReducer
   const [tasks, setTasks] = useState([
     { id: 1, text: 'Learn useReducer', completed: false },
@@ -21,7 +19,7 @@ function App() {
   ])
   const [filter, setFilter] = useState('all')
 
-  // TODO: Replace these individual handlers with dispatch calls
+  // TODO: Replace these individual handlers. Each should just call the dispatch function appropriately
   const handleAddTask = (e) => {
     e.preventDefault()
     const text = e.target.task.value.trim()
@@ -58,7 +56,6 @@ function App() {
     setFilter(newFilter)
   }
 
-  // Filter tasks
   const filteredTasks = tasks.filter(task => {
     if (filter === 'active') return !task.completed
     if (filter === 'completed') return task.completed
@@ -69,7 +66,7 @@ function App() {
     <div style={{ padding: '20px', maxWidth: '500px', margin: '0 auto' }}>
       <h1>Todo List with useReducer</h1>
 
-      {/* Add task form */}
+      {/* New task form */}
       <form onSubmit={handleAddTask} style={{ marginBottom: '20px' }}>
         <input
           type="text"
