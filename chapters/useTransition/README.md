@@ -6,7 +6,7 @@
 
 The main purpose of `useTransition` is to keep the UI responsive while performing a potentially slow state update. This is particularly useful when you have a state update that triggers a large re-render or involves a complex calculation. By marking the update as a transition, you tell React to prioritize other updates, such as user input, over the transition.
 
-`useTransition` helps prevent the UI from freezing or becoming unresponsive during slow state updates, providing a smoother user experience.
+`useTransition` helps prevent important UI elements from freezing or becoming unresponsive during slow state updates, providing a smoother user experience.
 
 ## How to Use It
 
@@ -24,25 +24,31 @@ The `useTransition` hook takes no arguments.
 ```javascript
 import React, { useState, useTransition } from 'react';
 
-function MyComponent() {
+export default function App() {
   const [isPending, startTransition] = useTransition();
-  const [text, setText] = useState('');
-  const [data, setData] = useState([]);
+  const [input, setInput] = useState('');
+  const [output, setOutput] = useState([]);
 
   const handleChange = (e) => {
     const value = e.target.value;
-    setText(value);
-    startTransition(() => {
-      // Simulate a slow data filtering
-      const filteredData = someExpensiveFilteringFunction(value);
-      setData(filteredData);
+    setInput(value);
+    startTransition(async () => {
+      // simulate a slow rendering process
+      const arrayOfData = [];
+      for (let i=0; i<20000; i++){
+        arrayOfData.push(value);
+      }
+      setOutput(arrayOfData);
     });
   };
 
   return (
     <>
-      <input value={text} onChange={handleChange} />
-      {isPending ? 'Loading...' : <MyList data={data} />}
+      <input value={input} onChange={handleChange} />
+      {isPending ? 
+        <p>'Loading...'</p> 
+      : 
+        <p>{output.map(o => <span>{o} </span>)}</p>}
     </>
   );
 }
@@ -50,7 +56,7 @@ function MyComponent() {
 
 **Explanation of the Example:**
 
-In this example, `useTransition` is used to update the `data` state without blocking the UI. The `startTransition` function is used to mark the state update as a transition. The `isPending` flag is used to display a loading indicator while the transition is in progress.
+In this example, `useTransition` is used to update the `data` state without blocking the UI. The Without it, the input field would lag and be hard to use. The `startTransition` function is used to mark the state update as a transition. The `isPending` flag is used to display a loading indicator while the transition is in progress.
 
 ## When to Use
 
