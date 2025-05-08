@@ -21,28 +21,38 @@ The `useDeferredValue` hook takes one argument:
 **Example:**
 
 ```javascript
-import React, { useState, useDeferredValue, useMemo } from 'react';
+import React, { useState, useDeferredValue, useEffect } from 'react';
 
-function MyComponent({ data }) {
+export default function App() {
+  const [data, setData] = useState(()=> {
+    const newData = [];
+    for(let i=0; i<50000; i++){
+      newData.push(i+"");
+    }
+    return newData;
+  });
   const [text, setText] = useState('');
+  const [listItems, setListItems] = useState([]);
   const deferredText = useDeferredValue(text);
 
-  // Simulate a slow list
-  const slowList = useMemo(() => {
-    const filteredData = data.filter(item => item.includes(deferredText));
-    return (
-      <ul>
-        {filteredData.map(item => (
-          <li key={item}>{item}</li>
-        ))}
-      </ul>
-    );
-  }, [data, deferredText]);
-
+  useEffect( ()=> {
+    console.log("render:"+text+","+deferredText);
+    const newListItems = data.map(item => {
+      if (item.includes(deferredText)) return item+" < --- ";
+      else return item;
+    });
+    setListItems(newListItems);
+  },[deferredText, data]);
+  
+  
   return (
     <>
       <input value={text} onChange={e => setText(e.target.value)} />
-      {slowList}
+      <ul>
+        {listItems.map(item => (
+          <li key={item}>{item}</li>
+        ))}
+      </ul>
     </>
   );
 }
@@ -50,7 +60,9 @@ function MyComponent({ data }) {
 
 **Explanation of the Example:**
 
-In this example, `deferredText` will lag behind the actual `text` state, allowing the input to remain responsive while the `slowList` updates at a lower priority. The `useMemo` hook is used to memoize the `slowList` component, preventing it from re-rendering unnecessarily.
+In this example, `deferredText` will lag behind the actual `text` state, allowing the input to remain responsive while the `slowList` updates at a lower priority. If you type in a series of characters very quickly, it will not console.log for each character. If you replace `deferredText` in the useEffect dependency array with `text`, then you'll see it log on every change. This demonstrates how useDeferredValue intelligently batches quick changes like this, which prevents unnecessary renders and improves responsiveness. 
+
+Note that this functionality and simulating the performance lag can cause different behavior on different machines. You might get lagging or timeout errors. Alternately, you might find it hard to type fast enough to outpace your computer.
 
 ## When to Use
 
