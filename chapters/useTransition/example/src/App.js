@@ -1,59 +1,41 @@
-import { useState, useEffect } from 'react'
-import './App.css'
+import { useState, useTransition } from 'react';
 
-// Simulated slow child component
-function TabContent({ tabName }) {
-  const [content, setContent] = useState(null)
-  
-  useEffect(() => {
-    const startTime = performance.now()
-      while (performance.now() - startTime < 1000) {
-        // Simulate heavy computation
+export default function App() {
+  const [isPending, startTransition] = useTransition();
+  const [input, setInput] = useState('');
+  const [output, setOutput] = useState([]);
+
+  const handleChangeWithTransition = (e) => {
+    const value = e.target.value;
+    setInput(value);
+    startTransition( () => {
+      // simulate a slow rendering process
+      const arrayOfData = [];
+      for (let i=0; i<20000; i++){
+        arrayOfData.push(value);
       }
-      setContent(`Tab selected: ${tabName}`)
-  }, [tabName])
+      setOutput(arrayOfData);
+    });
+  };
+
+  const handleChangeWithoutTransition = (e) => {
+    const value = e.target.value;
+    setInput(value);
+    
+    const arrayOfData = [];
+    for (let i=0; i<20000; i++){
+      arrayOfData.push(value);
+    }
+    setOutput(arrayOfData);
+  };
 
   return (
-    <div className="tab-content">
-      {content}
-    </div>
-  )
+    <>
+      <input value={input} onChange={handleChangeWithTransition} />
+      {isPending ? 
+        <p>'Loading...'</p> 
+      : 
+        <p>{output.map(o => <span>{o} </span>)}</p>}
+    </>
+  );
 }
-
-function App() {
-  const tabs = ['Posts', 'Photos', 'Contacts'];
-
-  const [tabIndex, setTabIndex] = useState(0);
-  const [tabContent, setTabContent] = useState("Posts");
-
-  //TODO: use useTransition hook to make the tab change immediately, rather than being delayed
-  const handleTabChange = (newTabIndex) => {
-    setTabIndex(newTabIndex);
-    setTabContent(tabs[newTabIndex])
-  }
-
-  return (
-    <div className="app-container">
-      <h1>useTransition Demo</h1>
-
-      <div className="tab-buttons">
-        {tabs.map((t, i) => (
-          <button
-            key={i}
-            onClick={() => handleTabChange(i)}
-            className={`tab-button ${tabIndex === i ? 'active' : 'inactive'}`}
-          >
-            {t}
-          </button>
-        ))}
-      </div>
-
-      {/*TODO: only show this while the tab content change is pending*/}
-      <div className="loading-indicator">Loading...</div>
-
-      <TabContent tabName={tabContent} />
-    </div>
-  )
-}
-
-export default App

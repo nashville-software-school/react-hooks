@@ -3,8 +3,7 @@ import { useState, useMemo } from 'react';
 export default function App({ seed }) {
   const [count, setCount] = useState(0);
 
-  // Memoize the result of the expensive calculation
-  const expensiveValue = useMemo(() => {
+  const doCalculation = () => {
     console.log('Calculating result...');
 
     //generate an array
@@ -24,7 +23,9 @@ export default function App({ seed }) {
       }
     }
     return output
-  }, [seed]); // Re-calculate only when seed changes
+  }
+
+  const expensiveValue = doCalculation();
 
   return (
     <div>

@@ -1,41 +1,17 @@
-import React from 'react';
-import './App.css';
+import { useState } from 'react';
 
-function App() {
-  
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    alert(`Submitted! Name: ---, Email: ---, Password: ---`);
+export default function App() {
+  const [count, setCount] = useState(0);
+
+  const incrementCount = () => {
+    // Use the functional update form to avoid issues with stale state
+    setCount(prevCount => prevCount + 1);
   };
 
   return (
-    <div className="App">
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="name">Name:</label>
-          <input
-            type="text"
-            id="name"
-          />
-        </div>
-        <div>
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-          />
-        </div>
-        <button type="submit">Login</button>
-      </form>
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={incrementCount}>Increment</button>
     </div>
   );
 }
-
-export default App;

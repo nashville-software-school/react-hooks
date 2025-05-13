@@ -19,52 +19,13 @@ The `useMemo` hook takes two arguments:
 
 `useMemo` returns the memoized value.
 
-**Example:**
-
-```javascript
-import React, { useState, useMemo } from 'react';
-
-function MyComponent({ seed }) {
-  const [count, setCount] = useState(0);
-
-  // Memoize the result of the expensive calculation
-  const expensiveValue = useMemo(() => {
-    console.log('Calculating result...');
-
-    //generate an array
-    const array = [];
-    for (let i=0; i<100000; i++){
-      array.push(i);
-    }
-    //reverse it a couple times
-    array.sort((a, b) => a - b);
-    array.sort((a, b) => a - b);
-    
-    //linear search to find the seed value
-    let output =0;
-    for (let i = 0; i < array.length; i++) {
-      if (array[i] === seed) {
-        output = i;
-      }
-    }
-    return output
-  }, [seed]); // Re-calculate only when seed changes
-
-  return (
-    <div>
-      <p>Count: {count}</p>
-      <p>Value: {expensiveValue}</p>
-      <button onClick={() => setCount(c => c + 1)}>Increment Count</button>
-    </div>
-  );
-}
-```
 **Explanation of the Example:**
 
 In this example, the `useMemo` hook is used to memoize the result of an absurdly expensive operation that creates a large array, reverses it, then performs a linear search.
 
-By using `useMemo`, this expensive calculation only runs when the `seed` value changes, not on any other render (eg. when `count` changes). This significantly improves performance for those re-renders
+By using `useMemo`, this expensive calculation only runs when the `seed` value changes, not on any other render (eg. when `count` changes). This significantly improves performance for those re-renders.
 
+If you change `index.js` to import from `App2.js` instead, you can see how the function runs unnecessarily each time you increment the count.
 
 ## Key Concepts
 

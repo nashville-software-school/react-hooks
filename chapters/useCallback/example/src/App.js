@@ -1,78 +1,39 @@
-import { useState, memo } from 'react'
-import './App.css'
+import React, { useCallback, useState } from 'react';
 
-// Memoized child component that receives a callback
-const TodoItem = memo(function TodoItem({ todo, onToggle }) {
-  console.log(`TodoItem rendered: ${todo.text}`)
-  
+// Child component wrapped with React.memo
+const Button = React.memo(function Button({ onClick, label }) {
+  console.log(`${label} button rendered`);
   return (
-    <li style={{ 
-      textDecoration: todo.completed ? 'line-through' : 'none',
-      cursor: 'pointer',
-      padding: '8px',
-      margin: '4px 0',
-      backgroundColor: '#f0f0f0'
-    }} onClick={() => onToggle(todo.id)}>
-      {todo.text}
-    </li>
-  )
-})
+    <button onClick={onClick}>
+      {label}
+    </button>
+  );
+});
 
-function App() {
-  const [todos, setTodos] = useState([
-    { id: 1, text: 'Learn useCallback', completed: false },
-    { id: 2, text: 'Build a project', completed: false },
-    { id: 3, text: 'Write documentation', completed: false }
-  ])
-  const [count, setCount] = useState(0)
+export default function App() {
+  const [count, setCount] = useState(0);
+  const [otherState, setOtherState] = useState(0);
 
-  // TODO: Memoize this callback with useCallback
-  // Currently, a new function is created on every render,
-  // causing TodoItem to re-render unnecessarily
-  const handleToggle = (todoId) => {
-    setTodos(currentTodos =>
-      currentTodos.map(todo =>
-        todo.id === todoId
-          ? { ...todo, completed: !todo.completed }
-          : todo
-      )
-    )
-  }
+  // Memoize the increment function with useCallback
+  const increment = useCallback(() => {
+    setCount(c => c + 1);
+  }, []); // The function never changes because it has no dependencies
 
-  const handleCountClick = () => {
-    setCount(c => c + 1)
-  }
+  // This function will be recreated on every render
+  const updateOtherState = () => {
+    setOtherState(s => s + 1);
+  };
 
   return (
-    <div className="App" style={{ padding: '20px' }}>
-      <h1>Todo List</h1>
+    <div>
+      <p>Count: {count}</p>
+      <p>Other State: {otherState}</p>
       
-      <div style={{ marginBottom: '20px' }}>
-        <button onClick={handleCountClick}>
-          Count: {count}
-        </button>
-        <p>
-          (Click count to verify TodoItems don't re-render)
-        </p>
-      </div>
-
-      <ul style={{ listStyle: 'none', padding: 0 }}>
-        {todos.map(todo => (
-          <TodoItem
-            key={todo.id}
-            todo={todo}
-            onToggle={handleToggle}
-          />
-        ))}
-      </ul>
-
-      <div style={{ marginTop: '20px' }}>
-        <p>Open console to see render logs</p>
-        <p>Notice that TodoItems currently re-render when count changes</p>
-        <p>After implementing useCallback, they won't!</p>
-      </div>
+      {/* This button will only re-render when increment changes */}
+      <Button onClick={increment} label="Increment" />
+      
+      {/* This button will re-render on every parent render */}
+      <Button onClick={updateOtherState} label="Update Other" />
     </div>
-  )
+  );
 }
-
-export default App

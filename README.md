@@ -4,39 +4,18 @@ React Hooks revolutionize how we write components by enabling function component
 
 What makes hooks powerful is their composability - they can be combined and reused across components, leading to cleaner, more maintainable code. You can even create custom hooks to encapsulate your own stateful logic and share it between components. This modular approach helps separate concerns and reduces code duplication, making your React applications more scalable and easier to test.
 
-In these lessons, we'll cover the most essential hooks, followed by a number of common and useful hooks that are well worth understanding and being able to use, then some more specialized hooks that are worth knowing about. Finally, we'll cover a few experimental hooks that are not fully supported but will likely be stable and important in the near future.
+In these lessons, we'll cover the most essential hooks, followed by a number of common and useful hooks that are well worth understanding and being able to use for optimization and other specific circumstances.
 
-## Essentials
+Note: Each of these includes a simple example to demonstrate how the hook works, as well as a challenge to practice using the hook, and a completed version of that challenge. Each of these is located in an appropriately named folder. To see the app running, copy the *src* folder into the *code* folder at the root of this repository, then run that app. All of these should work in that context, and are even hot-swappable, so you don't have to even restart that app when you change.
+
+## Chapters
 
 - [useState](./chapters/useState/README.md)
 - [useEffect](./chapters/useEffect/README.md)
 - [useContext](./chapters/useContext/README.md)
-
-## Useful
-
+- [useReducer](./chapters/useReducer/README.md)
 - [useMemo](./chapters/useMemo/README.md)
 - [useCallback](./chapters/useCallback/README.md)
+- [useTransition](./chapters/useTransition/README.md)
+- [useDeferredValue](./chapters/useDeferredValue/README.md)
 - [useRef](./chapters/useRef/README.md) 
-- [useReducer](./chapters/useReducer/README.md) <--TODO
-- [useTransition](./chapters/useTransition/README.md) <--TODO
-- [useDeferredValue](./chapters/useDeferredValue/README.md) <--TODO
-
-## Uncommon
-
-- [useLayoutEffect](./chapters/useLayoutEffect/README.md) <--TODO
-- [useDebugValue](./chapters/useDebugValue/README.md) <--TODO
-- [useImperativeHandle](./chapters/useImperativeHandle/README.md) <--TODO
-- [useId](./chapters/useId/README.md) <--TODO
-
-## Experimental
-
-- [use](./chapters/use/README.md) <--TODO
-
-
-
-NOTES: 
-
-useMemo
-    readme - note that this calculation isn't actually expensive. 
-    example/completed - move styles to CSS
-    discuss referential issue (not running a useEffect if an object is updated to identical value)

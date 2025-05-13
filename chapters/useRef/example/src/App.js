@@ -1,37 +1,27 @@
-import React, { useState } from 'react';
-import './App.css';
+import { useRef, useEffect } from 'react';
 
-function App() {
-  
-  const [name, setName] = useState("");
-  // TODO: Create refs for:
-  // (1) Storing previous name value
-  // (2) Accessing input element
-  // (3) Storing input dimensions
+export default function App() {
+  const intervalId = useRef(0);
 
-  // TODO: (1) Add useEffect to update previous name when name changes
+  useEffect(() => {
+    const startInterval = () => {
+      intervalId.current = setInterval(() => {
+        console.log('Interval running');
+      }, 1000);
+    };
 
-  // TODO: (3) Add useEffect to measure input dimensions on mount
+    const stopInterval = () => {
+      clearInterval(intervalId.current);
+    };
 
-  // TODO: (2) Create function to focus input element
+    startInterval();
+
+    return () => {
+      stopInterval();
+    };
+  }, []);
 
   return (
-    <div className="App">
-      <input
-        value={name}
-        onChange={e => setName(e.target.value)}
-        // TODO: (2,3) Add ref attribute to input
-      />
-      {/* TODO: (2) Add button to focus input */}
-      <div>
-        Current Value:
-        <br />
-        <b>{name}</b>
-      </div>
-      {/* TODO: (1) Add div to display previous value */}
-      {/* TODO: (3) Add div to display input dimensions */}
-    </div>
+    <h2>useRef Example</h2>
   );
 }
-
-export default App;

@@ -21,28 +21,6 @@ The `useState` hook takes one argument:
 1.  **state:** The current value of the state variable.
 2.  **setState:** A function that lets you update the state variable.
 
-**Example:**
-
-```javascript
-import React, { useState } from 'react';
-
-function MyComponent() {
-  const [count, setCount] = useState(0);
-
-  const incrementCount = () => {
-    // Use the functional update form to avoid issues with stale state
-    setCount(prevCount => prevCount + 1);
-  };
-
-  return (
-    <div>
-      <p>Count: {count}</p>
-      <button onClick={incrementCount}>Increment</button>
-    </div>
-  );
-}
-```
-
 **Explanation of the Example:**
 
 In this example, `useState` is used to create a `count` state variable, which is initialized to `0`. The `setCount` function is used to update the `count` state. The `incrementCount` function uses the functional update form (`prevCount => prevCount + 1`) to avoid issues with stale state.

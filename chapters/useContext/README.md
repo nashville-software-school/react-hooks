@@ -12,54 +12,6 @@ The `useContext` hook takes one argument:
 
 `useContext` returns the current context value for the given context. The context value is determined by the `value` prop of the nearest `<MyContext.Provider>` above the calling component in the tree.
 
-**Example:**
-
-```javascript
-import React, { createContext, useContext } from 'react';
-
-// Create a context with a default value
-const ThemeContext = createContext({
-  theme: 'light'
-});
-
-// Theme provider component that wraps the provider and manages the theme state
-function ThemeProvider({ children }) {
-  const [theme, setTheme] = useState('light');
-  
-  const toggleTheme = () => {
-    setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light');
-  };
-
-  // Provide both theme state and toggle function to all children through context
-  return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      {children}
-    </ThemeContext.Provider>
-  );
-}
-
-// Component that consumes the theme context
-function MyComponent() {
-  // Access the context value
-  const { theme, toggleTheme } = useContext(ThemeContext);
-
-  return (
-    <div className={`theme-container ${theme}`}>
-      <p>Current theme: {theme}</p>
-      <button onClick={toggleTheme}>Toggle Theme</button>
-    </div>
-  );
-}
-
-function App() {
-  return (
-    <ThemeProvider>
-      <MyComponent />
-    </ThemeProvider>
-  );
-}
-```
-
 **Explanation of the Example:**
 
 In this example, we first create `ThemeContext` using `React.createContext()` with a default value. Then we create a dedicated `ThemeProvider` component that manages the theme state and provides both the state and toggle function through context. This pattern encapsulates all theme-related logic within the provider component. `MyComponent` uses `useContext(ThemeContext)` to access the theme values, and the `App` component simply wraps its content with `ThemeProvider`. When the "Toggle Theme" button is clicked, the `toggleTheme` function from the context updates the theme state, causing all consuming components to re-render with the new theme, based on the CSS rules set for the corresponding class in a CSS file.
