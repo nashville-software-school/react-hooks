@@ -18,36 +18,6 @@ The `useDeferredValue` hook takes one argument:
 
 `useDeferredValue` returns a deferred version of the value you passed in. This deferred value will initially be the same as the original value, but it may lag behind if the UI is busy.
 
-**Example:**
-
-```javascript
-import React, { useState, useDeferredValue, useMemo } from 'react';
-
-function MyComponent({ data }) {
-  const [text, setText] = useState('');
-  const deferredText = useDeferredValue(text);
-
-  // Simulate a slow list
-  const slowList = useMemo(() => {
-    const filteredData = data.filter(item => item.includes(deferredText));
-    return (
-      <ul>
-        {filteredData.map(item => (
-          <li key={item}>{item}</li>
-        ))}
-      </ul>
-    );
-  }, [data, deferredText]);
-
-  return (
-    <>
-      <input value={text} onChange={e => setText(e.target.value)} />
-      {slowList}
-    </>
-  );
-}
-```
-
 **Explanation of the Example:**
 
 In this example, `deferredText` will lag behind the actual `text` state, allowing the input to remain responsive while the `slowList` updates at a lower priority. The `useMemo` hook is used to memoize the `slowList` component, preventing it from re-rendering unnecessarily.

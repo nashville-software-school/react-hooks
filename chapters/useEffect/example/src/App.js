@@ -1,51 +1,30 @@
-import { useState } from 'react'
-import './App.css'
+import { useState, useEffect } from 'react';
 
-function App() {
-  const [dogImage, setDogImage] = useState("")
-  const [breed, setBreed] = useState("husky")
-  const [allBreeds, setAllBreeds] = useState(["husky","otterhound","dalmation"])
+export default function App() {
+  const [data, setData] = useState(null);
+  const [count, setCount] = useState(0);
 
-  //TODO: On mount, fetch all available breeds
+  useEffect(() => {
+    // Fetch data from an API
+    fetch('https://fake-json-api.mock.beeceptor.com/users')
+      .then(response => response.json())
+      .then(data => setData(data));
 
-  //TODO: When breed changes, fetch a specific breed image
+    // Set up a timer
+    const timer = setInterval(() => {
+      setCount(c => c + 1);
+    }, 1000);
 
-  const handleBreedChange = (event) => {
-    setBreed(event.target.value)
-  }
+    // Clean up the timer when the component unmounts
+    return () => {
+      clearInterval(timer);
+    };
+  }, []); // Empty dependency array means this effect runs only once on mount
 
   return (
-    <div className="App">
-      <div className="top-panel">
-        <h1>Dog Image Viewer</h1>
-        <div className="form-group">
-          <label htmlFor="breed">Select Breed:</label>
-          <select
-            id="breed"
-            value={breed}
-            onChange={handleBreedChange}
-          >
-            {allBreeds.map(breed => (
-              <option key={breed} value={breed}>
-                {breed}
-              </option>
-            ))}
-          </select>
-        </div>
-      </div>
-
-      <div className="bottom-panel">
-        <h2>Selected Breed: {breed}</h2>
-        <div className="image-container">
-          <img
-            src={dogImage}
-            alt={`${breed} dog`}
-            className="dog-image"
-          />
-        </div>
-      </div>
+    <div>
+      {data ? data.length+" users" : 'Loading...'}
+      <p>Count: {count}</p>
     </div>
-  )
+  );
 }
-
-export default App

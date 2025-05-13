@@ -21,60 +21,14 @@ The `useRef` hook takes one argument:
 
 ## Typical Usage
 
-### Persisting Data
+### Persisting Data Example
 
-```javascript
-import React, { useRef, useEffect } from 'react';
 
-function MyComponent() {
-  const intervalId = useRef(0);
-
-  useEffect(() => {
-    const startInterval = () => {
-      intervalId.current = setInterval(() => {
-        console.log('Interval running');
-      }, 1000);
-    };
-
-    const stopInterval = () => {
-      clearInterval(intervalId.current);
-    };
-
-    startInterval();
-
-    return () => {
-      stopInterval();
-    };
-  }, []);
-
-  return (
-    <h2>useRef Example</h2>
-  );
-}
-```
-
-In this example, we store `intervalId` with useRef because we don't need to re-render if that value changes. The `useEffect` hook starts the interval when the component mounts and clears it when the component unmounts.
+In the first example (see `App.js`), we store `intervalId` with useRef because we don't need to re-render if that value changes. The `useEffect` hook starts the interval when the component mounts and clears it when the component unmounts.
 
 ### Manipulating DOM Elements
 
-```javascript
-import React, { useRef, useEffect } from 'react';
-
-function MyComponent() {
-  const inputElement = useRef(null);
-
-  useEffect(() => {
-    // Focus the input element on mount
-    inputElement.current.focus();
-  }, []);
-
-  return (
-    <input type="text" ref={inputElement} />
-  );
-}
-```
-
-Here, `inputElement` is used to get direct access to the `<input>` DOM element. The `useEffect` hook focuses the input element when the component mounts.
+In the second example (`App2.js`), `inputElement` is used to get direct access to the `<input>` DOM element. The `useEffect` hook focuses the input element when the component mounts.
 
 ## When to Use
 

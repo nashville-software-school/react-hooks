@@ -11,41 +11,6 @@ The `useEffect` hook takes two arguments:
 
 `useEffect` doesn't return any value.
 
-**Example:**
-
-```javascript
-import React, { useState, useEffect } from 'react';
-
-function MyComponent() {
-  const [data, setData] = useState(null);
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    // Fetch data from an API
-    fetch('/api/data')
-      .then(response => response.json())
-      .then(data => setData(data));
-
-    // Set up a timer
-    const timer = setInterval(() => {
-      setCount(c => c + 1);
-    }, 1000);
-
-    // Clean up the timer when the component unmounts
-    return () => {
-      clearInterval(timer);
-    };
-  }, []); // Empty dependency array means this effect runs only once on mount
-
-  return (
-    <div>
-      {data ? data.name : 'Loading...'}
-      <p>Count: {count}</p>
-    </div>
-  );
-}
-```
-
 **Explanation of the Example:**
 
 In this example, `useEffect` is used to fetch data from an API and set up a timer when the component mounts. The empty dependency array `[]` ensures that the effect only runs once. The effect function also returns a cleanup function. React will call this function when the component unmounts. In most cases, this isn't necessary. But here, we need it to stop the timer that is running.

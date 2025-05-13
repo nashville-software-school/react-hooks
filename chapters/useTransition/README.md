@@ -19,44 +19,10 @@ The `useTransition` hook takes no arguments.
 1.  **isPending:** A boolean value that indicates whether a transition is currently pending.
 2.  **startTransition:** A function that lets you mark a state update as a transition.
 
-**Example:**
-
-```javascript
-import React, { useState, useTransition } from 'react';
-
-export default function App() {
-  const [isPending, startTransition] = useTransition();
-  const [input, setInput] = useState('');
-  const [output, setOutput] = useState([]);
-
-  const handleChange = (e) => {
-    const value = e.target.value;
-    setInput(value);
-    startTransition(async () => {
-      // simulate a slow rendering process
-      const arrayOfData = [];
-      for (let i=0; i<20000; i++){
-        arrayOfData.push(value);
-      }
-      setOutput(arrayOfData);
-    });
-  };
-
-  return (
-    <>
-      <input value={input} onChange={handleChange} />
-      {isPending ? 
-        <p>'Loading...'</p> 
-      : 
-        <p>{output.map(o => <span>{o} </span>)}</p>}
-    </>
-  );
-}
-```
 
 **Explanation of the Example:**
 
-In this example, `useTransition` is used to update the `data` state without blocking the UI. The Without it, the input field would lag and be hard to use. The `startTransition` function is used to mark the state update as a transition. The `isPending` flag is used to display a loading indicator while the transition is in progress.
+In this example, `useTransition` is used to update the `data` state without blocking the UI. Without it, the input field would lag and be hard to use. The `startTransition` function is used to mark the state update as a transition. The `isPending` flag is used to display a loading indicator while the transition is in progress.
 
 ## When to Use
 
