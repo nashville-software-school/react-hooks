@@ -6,7 +6,14 @@ What makes hooks powerful is their composability - they can be combined and reus
 
 In these lessons, we'll cover the most essential hooks, followed by a number of common and useful hooks that are well worth understanding and being able to use for optimization and other specific circumstances.
 
-Note: Each of these includes a simple example to demonstrate how the hook works, as well as a challenge to practice using the hook, and a completed version of that challenge. Each of these is located in an appropriately named folder. To see the app running, _copy_ the `src` folder into the `code` folder at the root of this repository, then run that app. All of these should work in that context, and are even hot-swappable, so you don't have to even restart that app when you change.
+Note: Each of these includes a simple example to demonstrate how the hook works, as well as a challenge to practice using the hook, and a completed version of that challenge. Each of these is located in an appropriately named folder. To run and work with each one, take these steps:
+
+- Open the `code` folder at the root of this project and if there's a `src` folder in there, delete it.
+- Copy the `src` folder from an example or challenge into that `code` folder
+- Run that app. After you've run `npm install` once, any of these should work in that context, and you don't have to restart that app when you change. 
+- When you're done, you might want to copy that back to the original folder for reference later 
+
+Note: Before starting, make sure you have the React Dev Tools extension installed in your browser, and know how to use it.
 
 ## Chapters
 
