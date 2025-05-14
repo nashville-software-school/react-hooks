@@ -6,7 +6,7 @@ What makes hooks powerful is their composability - they can be combined and reus
 
 In these lessons, we'll cover the most essential hooks, followed by a number of common and useful hooks that are well worth understanding and being able to use for optimization and other specific circumstances.
 
-Note: Each of these includes a simple example to demonstrate how the hook works, as well as a challenge to practice using the hook, and a completed version of that challenge. Each of these is located in an appropriately named folder. To see the app running, copy the *src* folder into the *code* folder at the root of this repository, then run that app. All of these should work in that context, and are even hot-swappable, so you don't have to even restart that app when you change.
+Note: Each of these includes a simple example to demonstrate how the hook works, as well as a challenge to practice using the hook, and a completed version of that challenge. Each of these is located in an appropriately named folder. To see the app running, _copy_ the `src` folder into the `code` folder at the root of this repository, then run that app. All of these should work in that context, and are even hot-swappable, so you don't have to even restart that app when you change.
 
 ## Chapters
 

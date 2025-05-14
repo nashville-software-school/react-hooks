@@ -5,13 +5,15 @@ export default function App() {
 
   const incrementCount = () => {
     // Use the functional update form to avoid issues with stale state
-    setCount(prevCount => prevCount + 1);
+    const newCount = count+1;
+    setCount(newCount);
   };
 
   return (
     <div>
-      <p>Count: {count}</p>
       <button onClick={incrementCount}>Increment</button>
+      <label>Count:</label>
+      <input value={count}/>
     </div>
   );
 }
