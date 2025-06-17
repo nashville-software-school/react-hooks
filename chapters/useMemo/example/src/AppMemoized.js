@@ -5,7 +5,7 @@ export default function App() {
   const [count, setCount] = useState(0);
 
   // Memoize the result of the expensive calculation
-  const doCalculation = () => {
+  const expensiveValue = useMemo(() => {
     console.log('Calculating result...');
 
     //generate an array
@@ -25,14 +25,12 @@ export default function App() {
       }
     }
     return output
-  }
-
-  const expensiveValue = doCalculation();
+  }, [input]); // Re-calculate only when input changes
 
   return (
     <div>
-
-      Input (int):<input onChange={(e) => setInput(parseInt(e.target.value))}/>
+      <p>Input (int):</p>
+      <input onChange={(e) => setInput(parseInt(e.target.value))}/>
       <p>Count: {count}</p>
       <p>Output: {expensiveValue}</p>
       <button onClick={() => setCount(c => c + 1)}>Increment Count</button>
