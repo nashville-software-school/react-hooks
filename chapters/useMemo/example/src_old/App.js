@@ -32,8 +32,7 @@ export default function App() {
   return (
     <div>
       <p>Input (int):</p>
-      <input value={input} onChange={(e) => setInput(parseInt(e.target.value))}/>      
-      <p>Count: {count}</p>
+      <input onChange={(e) => setInput(parseInt(e.target.value))}/>      <p>Count: {count}</p>
       <p>Output: {expensiveValue}</p>
       <button onClick={() => setCount(c => c + 1)}>Increment Count</button>
     </div>
