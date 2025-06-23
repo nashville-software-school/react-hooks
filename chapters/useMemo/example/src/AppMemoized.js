@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 
 export default function App() {
   const [input, setInput] = useState(0);
   const [count, setCount] = useState(0);
 
-  // an expensive calculation
-  const doCalculation = () => {
+  // Memoize the result of the expensive calculation
+  const expensiveValue = useMemo(() => {
     console.log('Calculating result...');
 
     //generate an array
@@ -25,14 +25,12 @@ export default function App() {
       }
     }
     return output
-  }
-
-  const expensiveValue = doCalculation();
+  }, [input]); // Re-calculate only when input changes
 
   return (
     <div>
       <p>Input (int):</p>
-      <input value={input} onChange={(e) => setInput(parseInt(e.target.value))}/>      
+      <input onChange={(e) => setInput(parseInt(e.target.value))}/>
       <p>Count: {count}</p>
       <p>Output: {expensiveValue}</p>
       <button onClick={() => setCount(c => c + 1)}>Increment Count</button>

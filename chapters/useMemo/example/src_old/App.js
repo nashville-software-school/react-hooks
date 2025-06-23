@@ -1,8 +1,10 @@
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 
-export default function App({ seed }) {
+export default function App() {
+  const [input, setInput] = useState(0);
   const [count, setCount] = useState(0);
 
+  // an expensive calculation
   const doCalculation = () => {
     console.log('Calculating result...');
 
@@ -15,10 +17,10 @@ export default function App({ seed }) {
     array.sort((a, b) => a - b);
     array.sort((a, b) => a - b);
     
-    //linear search to find the seed value
+    //linear search to find the input value
     let output =0;
     for (let i = 0; i < array.length; i++) {
-      if (array[i] === seed) {
+      if (array[i] == input) {
         output = i;
       }
     }
@@ -29,8 +31,9 @@ export default function App({ seed }) {
 
   return (
     <div>
-      <p>Count: {count}</p>
-      <p>Value: {expensiveValue}</p>
+      <p>Input (int):</p>
+      <input onChange={(e) => setInput(parseInt(e.target.value))}/>      <p>Count: {count}</p>
+      <p>Output: {expensiveValue}</p>
       <button onClick={() => setCount(c => c + 1)}>Increment Count</button>
     </div>
   );

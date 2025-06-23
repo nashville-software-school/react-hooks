@@ -24,7 +24,7 @@ function App() {
   const [count, setCount] = useState(0)
 
   // Memoized callback that only changes when todos changes
-  const handleToggle = useCallback(() => {
+  const handleToggle = useCallback((todoId) => {
     setTodos(currentTodos =>
       currentTodos.map(todo =>
         todo.id === todoId
